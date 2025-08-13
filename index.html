@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morse Warriorz</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+   
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <div class="loading-text">LOADING</div>
+            <div class="loading-counter" id="loadingCounter">0</div>
+        </div>
+    </div>
+
+    <div class="container" id="mainContent">
+        <!-- Hero Section -->
+
+
+        <!-- Main Navigation -->
+        <nav class="main-nav">
+            <a href="#converter" class="nav-link">CONVERTER</a>
+            <a href="#cheatsheet" class="nav-link">CHEATSHEET</a>
+            <a href="#practice" class="nav-link">PRACTICE</a>
+            <a href="#reference" class="nav-link">REFERENCE</a>
+        </nav>
+
+        <!-- Converter Section -->
+        <section id="converter" class="section">
+            <div class="section-header">
+                <h2 class="section-title">Text to Morse</h2>
+                <div class="section-number">01</div>
+            </div>
+            <div class="converter-grid">
+                <div class="input-area">
+                    <textarea id="textInput" placeholder="Type your message..." rows="4"></textarea>
+                    <div class="button-row">
+                        <button id="convertBtn" class="btn-primary">CONVERT</button>
+                        <button id="playBtn" class="btn-secondary" disabled>PLAY</button>
+                    </div>
+                </div>
+                <div class="output-area">
+                    <div id="morseOutput" class="morse-display"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Decoder Section -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">Morse to Text</h2>
+                <div class="section-number">02</div>
+            </div>
+            <div class="converter-grid">
+                <div class="input-area">
+                    <textarea id="morseInput" placeholder="... --- ..." rows="4"></textarea>
+                    <button id="decodeBtn" class="btn-primary">DECODE</button>
+                </div>
+                <div class="output-area">
+                    <div id="textOutput" class="text-display"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cheatsheet Section -->
+        <section id="cheatsheet" class="section">
+            <div class="section-header">
+                <h2 class="section-title">Memory Guide</h2>
+                <div class="section-number">03</div>
+            </div>
+            <p class="section-description">
+                Memorable phrase nuances to learn morse code patterns. (lowercase = dot, CAPS = dash)<br>
+                <a href="https://youtu.be/D8tPkb98Fkk?si=a8Dmf6OsBYNEMdrF" target="_blank" class="video-link">Original YouTube reference</a>
+            </p>
+            <div class="cheatsheet-grid" id="cheatsheetGrid">
+                <!-- Populated by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Practice Section -->
+        <section id="practice" class="section">
+            <div class="section-header">
+                <h2 class="section-title">Practice</h2>
+                <div class="section-number">04</div>
+            </div>
+            <div class="practice-container">
+                <div class="practice-question-area">
+                    <div id="practiceQuestion" class="practice-morse">.-</div>
+                    <button id="playPracticeBtn" class="btn-secondary">PLAY</button>
+                </div>
+                <div class="practice-answer-area">
+                    <input type="text" id="practiceAnswer" placeholder="?" maxlength="1">
+                    <button id="checkAnswerBtn" class="btn-primary">CHECK</button>
+                </div>
+                <div id="practiceResult" class="practice-result"></div>
+                <div class="practice-score">
+                    <span>Score: <span id="score">0</span>/10</span>
+                    <button id="newQuestionBtn" class="btn-accent">NEXT</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reference Section -->
+        <section id="reference" class="section">
+            <div class="section-header">
+                <h2 class="section-title">Reference</h2>
+                <div class="section-number">05</div>
+            </div>
+            <div class="morse-reference-grid" id="morseGrid">
+                <!-- Populated by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>By kay :)</p>
+            <p>Crafted for wannabe morse code learners</p>
+            <a href="mailto:kayzspace@outlook.com">Contact</a>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
