@@ -345,11 +345,23 @@ body {
 }
 
 .practice-result.correct {
-  color: #22c55e;
+  color: #377e17;
 }
 
 .practice-result.incorrect {
-  color: #ef4444;
+  color: #f51515;
+}
+
+.practice-result.fade-in {
+  opacity: 0;
+  animation: fadeIn 0.6s ease forwards;
+  color: #1a1a1a;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
 }
 
 .practice-score {

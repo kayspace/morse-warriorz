@@ -77,6 +77,7 @@ const cheatsheetPhrases = {
 // Audio context for playing morse code sounds
 let audioContext;
 let isPlaying = false;
+let soundEnabled = true;
 
 // Practice game variables
 let currentQuestion = "";
@@ -355,6 +356,14 @@ function generateNewQuestion() {
   document.getElementById("practiceAnswer").focus();
 }
 
+document.getElementById("soundToggleBtn").addEventListener("click", () => {
+  soundEnabled = !soundEnabled;
+  document.getElementById("soundToggleBtn").textContent = soundEnabled
+    ? "Sound: ON"
+    : "Sound: OFF";
+
+});
+
 function checkAnswer() {
   const userAnswer = document
     .getElementById("practiceAnswer")
@@ -371,7 +380,7 @@ function checkAnswer() {
     resultDiv.className = "practice-result correct";
 
     // Play success sound
-    if (audioContext) {
+    if (audioContext && soundEnabled) {
       playTone(800, audioContext.currentTime, 0.2);
       setTimeout(() => playTone(1000, audioContext.currentTime, 0.2), 200);
     }
@@ -380,7 +389,7 @@ function checkAnswer() {
     resultDiv.className = "practice-result incorrect";
 
     // Play error sound
-    if (audioContext) {
+    if (audioContext && soundEnabled) {
       playTone(300, audioContext.currentTime, 0.3);
     }
   }
@@ -388,10 +397,43 @@ function checkAnswer() {
   document.getElementById("score").textContent = `${score}/${totalQuestions}`;
 
   // Auto-generate new question after 2 seconds
-  setTimeout(() => {
-    generateNewQuestion();
-  }, 2000);
+  if (totalQuestions < 10) {
+    setTimeout(() => {
+      generateNewQuestion();
+    }, 2000);
+  } else {
+    endGame();
+  }
 }
+
+function endGame() {
+  const resultDiv = document.getElementById("practiceResult");
+  resultDiv.textContent = `Game Over! Final Score: ${score}/10 (^◕.◕^)`;
+  resultDiv.className = "practice-result correct fade-in";
+
+  document.getElementById("practiceQuestion").textContent = "";
+  document.getElementById("practiceAnswer").disabled = true;
+  document.getElementById("checkAnswerBtn").disabled = true;
+
+  const nextBtn = document.getElementById("newQuestionBtn");
+  nextBtn.textContent = "PLAY AGAIN";
+  nextBtn.onclick = resetGame;
+}
+
+function resetGame() {
+  score = 0;
+  totalQuestions = 0;
+  document.getElementById("score").textContent = "0/10";
+  document.getElementById("practiceAnswer").disabled = false;
+  document.getElementById("checkAnswerBtn").disabled = false;
+
+  const nextBtn = document.getElementById("newQuestionBtn");
+  nextBtn.textContent = "NEXT";
+  nextBtn.onclick = generateNewQuestion;
+
+  generateNewQuestion();
+}
+
 
 function generateMorseReference() {
   const morseGrid = document.getElementById("morseGrid");
