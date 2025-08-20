@@ -2,6 +2,11 @@
 
 A minimalist morse code learning platform with interactive converters, memorable phrases, and practice exercises.
 
+## 💡 Why This Exists
+
+- This project was born from a spontaneous moment of curiosity - one day I suddenly had the urge to learn Morse code just to pass time. Then i straight went to youtube to check about morse code and one of the video I watched, I used it as a refernce to create a section in the website. 
+- Instead of using existing tools, I decided to create my own website with an intuitive, fun, and easy-to-use interface. The goal was to build something I could always refer back to for anything Morse code related, while making the learning experience enjoyable and accessible.
+
 ## 🚀 What It Does
 
 This website helps you learn morse code through multiple interactive tools:
