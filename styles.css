@@ -24,6 +24,7 @@ fff
   --color-6: #fff;
   --color-7: #f8f8f8;
   --color-8: #e5e5e5;
+  --color-9: #333333af;
 
   --alpha-color-1: rgba(250, 250, 250, 0.95);
   --alpha-color-2: rgba(0, 0, 0, 0.05);
@@ -38,6 +39,7 @@ fff
   --color-6: #000;
   --color-7: #070707;
   --color-8: #1a1a1a;
+  --color-9: #ccccccaf;
 
   --alpha-color-1: rgba(5, 5, 5, 0.95);
   --alpha-color-2: rgba(255, 255, 255, 0.05);
@@ -220,7 +222,7 @@ body {
   width: 100%;
   min-height: 120px;
   padding: 20px;
-  border: 1px solid var(--color-8);
+  border: 1px solid var(--color-9);
   border-radius: 0;
   font-family: "JetBrains Mono", monospace;
   font-size: 16px;
@@ -253,7 +255,7 @@ body {
   min-height: 120px;
   padding: 20px;
   background: var(--color-7);
-  border: 1px solid var(--color-8);
+  border: 1px solid var(--color-9);
   font-family: "JetBrains Mono", monospace;
   font-size: 18px;
   letter-spacing: 2px;
