@@ -93,7 +93,6 @@ const cheatsheetPhrases = {
 
 // Audio context for playing morse code sounds
 let audioContext;
-let isPlaying = false;
 let soundEnabled = true;
 
 // Practice game variables
@@ -101,6 +100,19 @@ let currentQuestion = "";
 let currentAnswer = "";
 let score = 0;
 let totalQuestions = 0;
+
+// Sound Quiz variables
+let quizTargetText = "";
+let quizTargetMorse = "";
+let quizRounds = 0;
+let quizCorrect = 0;
+let quizStreak = 0;
+let currentVolume = 0.8;
+let progressInterval;
+let visualizerInterval;
+let isPlaying = false;
+let progressStartTime = 0;
+let currentProgressDuration = 0;
 
 const currentSection = "converter";
 
@@ -113,6 +125,9 @@ function showLoadingAnimation() {
   const loadingCounter = document.getElementById("loadingCounter");
   const mainContent = document.getElementById("mainContent");
 
+  // Ensure page starts at top
+  window.scrollTo(0, 0);
+
   let counter = 0;
   const interval = setInterval(() => {
     counter += Math.floor(Math.random() * 15) + 5;
@@ -124,6 +139,8 @@ function showLoadingAnimation() {
         loadingScreen.classList.add("hidden");
         mainContent.classList.add("visible");
         initializeApp();
+        // Ensure focus is at top after initialization
+        window.scrollTo(0, 0);
       }, 500);
     }
     loadingCounter.textContent = counter;
@@ -136,6 +153,7 @@ function initializeApp() {
   generateMorseReference();
   generateCheatsheet();
   generateNewQuestion();
+  initializeSoundQuiz();
   setupScrollNavigation();
 }
 
@@ -245,6 +263,61 @@ function setupEventListeners() {
       }
     });
 
+  // Sound Quiz
+  const quizPlayBtn = document.getElementById("quizPlayBtn");
+  const quizNextBtn = document.getElementById("quizNextBtn");
+  const quizReplayBtn = document.getElementById("quizReplayBtn");
+  const quizCheckBtn = document.getElementById("quizCheckBtn");
+  const quizAnswer = document.getElementById("quizAnswer");
+  const quizSpeed = document.getElementById("quizSpeed");
+  const quizSpeedValue = document.getElementById("quizSpeedValue");
+  const quizVolume = document.getElementById("quizVolume");
+  const quizVolumeValue = document.getElementById("quizVolumeValue");
+
+  if (quizPlayBtn) {
+    quizPlayBtn.addEventListener("click", toggleQuizPlayback);
+  }
+  if (quizNextBtn) {
+    quizNextBtn.addEventListener("click", generateNewQuizItem);
+  }
+  if (document.getElementById("quizResetBtn")) {
+    document.getElementById("quizResetBtn").addEventListener("click", resetQuizGame);
+  }
+  if (quizCheckBtn) {
+    quizCheckBtn.addEventListener("click", checkQuizAnswer);
+  }
+  if (quizAnswer) {
+    quizAnswer.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        checkQuizAnswer();
+      }
+    });
+  }
+  if (quizSpeed && quizSpeedValue) {
+    quizSpeed.addEventListener("input", () => {
+      quizSpeedValue.textContent = `${Number(quizSpeed.value).toFixed(1)}x`;
+    });
+  }
+  if (quizVolume && quizVolumeValue) {
+    quizVolume.addEventListener("input", () => {
+      currentVolume = Number(quizVolume.value) / 100;
+      quizVolumeValue.textContent = `${quizVolume.value}%`;
+      
+      // Update volume for currently playing audio
+      if (isPlaying && audioContext) {
+        // The volume will be applied to new tones being created
+        // Existing tones will continue at their original volume
+      }
+    });
+  }
+  if (document.getElementById("quizDifficulty")) {
+    document.getElementById("quizDifficulty").addEventListener("change", () => {
+      // Immediately stop any current playback
+      stopQuizPlayback();
+      // Generate new quiz item with new difficulty
+      generateNewQuizItem();
+    });
+  }
 }
 
 function convertToMorse() {
@@ -314,29 +387,64 @@ function playPracticeSound() {
   playMorseSequence(morse);
 }
 
-function playMorseSequence(morse) {
+function playMorseSequence(morse, speedMultiplier = 1) {
   if (isPlaying) return;
 
   isPlaying = true;
+  setQuizPlayingState(true);
+  startProgressTracking(morse, speedMultiplier);
+  startVisualizer();
+
   let time = audioContext.currentTime;
+  const totalDuration = calculateMorseDuration(morse, speedMultiplier);
+
+  const unitDot = 0.1 / speedMultiplier; // base 0.1s for dot
+  const unitDash = 0.3 / speedMultiplier;
+  const gapIntra = 0.05 / speedMultiplier; // small gap between tones of same char
+  const gapLetter = 0.2 / speedMultiplier;
+  const gapWord = 0.5 / speedMultiplier;
 
   for (const char of morse) {
     if (char === ".") {
-      playTone(600, time, 0.1);
-      time += 0.15;
+      playTone(600, time, unitDot);
+      time += unitDot + gapIntra;
     } else if (char === "-") {
-      playTone(600, time, 0.3);
-      time += 0.35;
+      playTone(600, time, unitDash);
+      time += unitDash + gapIntra;
     } else if (char === " ") {
-      time += 0.2;
+      time += gapLetter;
     } else if (char === "/") {
-      time += 0.5;
+      time += gapWord;
     }
   }
 
   setTimeout(() => {
-    isPlaying = false;
-  }, (time - audioContext.currentTime) * 1000);
+    if (isPlaying) {
+      stopQuizPlayback();
+    }
+  }, totalDuration * 1000);
+}
+
+function calculateMorseDuration(morse, speedMultiplier) {
+  let duration = 0;
+  const unitDot = 0.1 / speedMultiplier;
+  const unitDash = 0.3 / speedMultiplier;
+  const gapIntra = 0.05 / speedMultiplier;
+  const gapLetter = 0.2 / speedMultiplier;
+  const gapWord = 0.5 / speedMultiplier;
+
+  for (const char of morse) {
+    if (char === ".") {
+      duration += unitDot + gapIntra;
+    } else if (char === "-") {
+      duration += unitDash + gapIntra;
+    } else if (char === " ") {
+      duration += gapLetter;
+    } else if (char === "/") {
+      duration += gapWord;
+    }
+  }
+  return duration;
 }
 
 function playTone(frequency, startTime, duration) {
@@ -351,9 +459,10 @@ function playTone(frequency, startTime, duration) {
   oscillator.frequency.value = frequency;
   oscillator.type = "sine";
 
+  // Use current volume setting directly
   gainNode.gain.setValueAtTime(0, startTime);
-  gainNode.gain.linearRampToValueAtTime(0.3, startTime + 0.01);
-  gainNode.gain.linearRampToValueAtTime(0.3, startTime + duration - 0.01);
+  gainNode.gain.linearRampToValueAtTime(currentVolume, startTime + 0.01);
+  gainNode.gain.linearRampToValueAtTime(currentVolume, startTime + duration - 0.01);
   gainNode.gain.linearRampToValueAtTime(0, startTime + duration);
 
   oscillator.start(startTime);
@@ -497,6 +606,370 @@ function generateCheatsheet() {
 
     cheatsheetGrid.appendChild(cheatsheetItem);
   });
+}
+
+// --- Sound Quiz ---
+function initializeSoundQuiz() {
+  // pre-populate first quiz but don't auto-play
+  generateNewQuizItemWithoutAutoPlay();
+  const speedEl = document.getElementById("quizSpeed");
+  const speedValue = document.getElementById("quizSpeedValue");
+  if (speedEl && speedValue) {
+    speedValue.textContent = `${Number(speedEl.value).toFixed(1)}x`;
+  }
+  setQuizStatusText("Ready");
+}
+
+function smoothClearInput(inputEl, placeholderText = "Type what you heard...") {
+  try {
+    inputEl.classList.add("clearing");
+    setTimeout(() => {
+      inputEl.value = "";
+      inputEl.placeholder = placeholderText;
+      inputEl.classList.remove("clearing");
+      inputEl.focus();
+    }, 180);
+  } catch (_) {
+    inputEl.value = "";
+    inputEl.placeholder = placeholderText;
+    inputEl.focus();
+  }
+}
+
+function getQuizSpeedMultiplier() {
+  const speedEl = document.getElementById("quizSpeed");
+  const value = speedEl ? Number(speedEl.value) : 1;
+  return value > 0 ? value : 1;
+}
+
+function generateNewQuizItem() {
+  // Stop current playback first
+  stopQuizPlayback();
+  
+  const difficulty = (document.getElementById("quizDifficulty") || {}).value || "letter";
+  if (difficulty === "letter") {
+    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    const ch = letters[Math.floor(Math.random() * letters.length)];
+    quizTargetText = ch;
+    quizTargetMorse = morseCode[ch];
+  } else if (difficulty === "word") {
+    const words = [
+      "MORSE",
+      "CODE",
+      "HELLO",
+      "WORLD",
+      "TEST",
+      "RADIO",
+      "SIGNAL",
+      "LEARN",
+      "QUIZ",
+      "WARRIORZ"
+    ];
+    const w = words[Math.floor(Math.random() * words.length)];
+    quizTargetText = w;
+    quizTargetMorse = textToMorse(w);
+  } else {
+    const sentences = [
+      "HELLO WORLD",
+      "MORSE CODE QUIZ",
+      "I LOVE RADIO",
+      "LEARN MORSE FAST"
+    ];
+    const s = sentences[Math.floor(Math.random() * sentences.length)];
+    quizTargetText = s;
+    quizTargetMorse = textToMorse(s);
+  }
+
+  const resultDiv = document.getElementById("quizResult");
+  const input = document.getElementById("quizAnswer");
+  if (resultDiv) resultDiv.textContent = "";
+  if (input) {
+    smoothClearInput(input);
+  }
+  
+  // Reset progress and visualizer
+  resetProgress();
+  resetVisualizer();
+  
+  // Auto-play the new item
+  setTimeout(() => {
+    if (quizTargetMorse) {
+      playMorseSequence(quizTargetMorse, getQuizSpeedMultiplier());
+    }
+  }, 100);
+}
+
+function textToMorse(text) {
+  let out = "";
+  for (const chRaw of text.toUpperCase()) {
+    const ch = chRaw;
+    if (ch === " ") {
+      out += "/ ";
+    } else if (morseCode[ch]) {
+      out += morseCode[ch] + " ";
+    }
+  }
+  return out.trim();
+}
+
+function normalizedString(str) {
+  return (str || "")
+    .toUpperCase()
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function checkQuizAnswer() {
+  const answerEl = document.getElementById("quizAnswer");
+  const resultDiv = document.getElementById("quizResult");
+  const scoreEl = document.getElementById("quizScore");
+  const roundEl = document.getElementById("quizRound");
+  const streakEl = document.getElementById("quizStreak");
+  if (!answerEl || !resultDiv) return;
+
+  const user = normalizedString(answerEl.value);
+  const target = normalizedString(quizTargetText);
+  if (!user) return;
+
+  quizRounds++;
+
+  if (user === target) {
+    quizCorrect++;
+    quizStreak++;
+    resultDiv.textContent = "Correct!";
+    resultDiv.className = "result-display correct";
+    resultDiv.style.display = "block";
+    if (audioContext && soundEnabled) {
+      playTone(800, audioContext.currentTime, 0.18);
+      setTimeout(() => playTone(1000, audioContext.currentTime, 0.18), 200);
+    }
+  } else {
+    quizStreak = 0;
+    resultDiv.textContent = `Incorrect. It was "${target}"`;
+    resultDiv.className = "result-display incorrect";
+    resultDiv.style.display = "block";
+    if (audioContext && soundEnabled) {
+      playTone(300, audioContext.currentTime, 0.25);
+    }
+  }
+
+  if (scoreEl) {
+    const pct = Math.round((quizCorrect / quizRounds) * 100);
+    scoreEl.textContent = `${isNaN(pct) ? 0 : pct}%`;
+  }
+  if (roundEl) {
+    roundEl.textContent = String(quizRounds);
+  }
+  if (streakEl) {
+    streakEl.textContent = String(quizStreak);
+  }
+
+  // Clear input and placeholder after answer
+  if (answerEl) {
+    smoothClearInput(answerEl, "");
+  }
+
+  // Clear result after animation (match CSS duration 2.2s)
+  setTimeout(() => {
+    if (resultDiv) {
+      resultDiv.textContent = "";
+      resultDiv.className = "result-display";
+      resultDiv.style.display = "none";
+    }
+  }, 2300);
+
+  // prepare next after delay to match fade
+  setTimeout(generateNewQuizItem, 2300);
+}
+
+function setQuizPlayingState(playing) {
+  const dot = document.getElementById("quizPlayingIndicator");
+  const text = document.getElementById("quizStatusText");
+  if (!dot || !text) return;
+  dot.classList.remove("changed");
+  if (playing) {
+    dot.classList.add("playing");
+    text.textContent = "Playing...";
+  } else {
+    dot.classList.remove("playing");
+    text.textContent = "Ready";
+  }
+}
+
+function flashQuizChangedState() {
+  const dot = document.getElementById("quizPlayingIndicator");
+  if (!dot) return;
+  dot.classList.add("changed");
+  setTimeout(() => dot.classList.remove("changed"), 600);
+}
+
+function setQuizStatusText(msg) {
+  const text = document.getElementById("quizStatusText");
+  if (text) text.textContent = msg;
+}
+
+// Music Player Functions
+function toggleQuizPlayback() {
+  if (isPlaying) {
+    stopQuizPlayback();
+  } else {
+    if (quizTargetMorse) {
+      playMorseSequence(quizTargetMorse, getQuizSpeedMultiplier());
+    }
+  }
+}
+
+function stopQuizPlayback() {
+  isPlaying = false;
+  setQuizPlayingState(false);
+  stopProgressTracking();
+  stopVisualizer();
+  
+  // Stop all audio by closing and reinitializing audio context
+  if (audioContext) {
+    audioContext.close();
+    audioContext = null;
+    initializeAudio();
+  }
+}
+
+
+
+function setQuizPlayingState(playing) {
+  const playBtn = document.getElementById("quizPlayBtn");
+  if (!playBtn) return;
+  
+  if (playing) {
+    playBtn.innerHTML = '<i class="fa-solid fa-stop"></i>';
+    playBtn.title = "Stop";
+    playBtn.classList.add("playing");
+  } else {
+    playBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+    playBtn.title = "Play";
+    playBtn.classList.remove("playing");
+  }
+}
+
+function startProgressTracking() { /* progress removed */ }
+
+function stopProgressTracking() { /* progress removed */ }
+
+function resetProgress() { /* progress removed */ }
+
+function startVisualizer() {
+  const bars = document.querySelectorAll(".visualizer-bars .bar");
+  
+  visualizerInterval = setInterval(() => {
+    bars.forEach((bar, index) => {
+      const height = Math.random() * 30 + 10;
+      bar.style.height = `${height}px`;
+      
+      if (Math.random() > 0.7) {
+        bar.classList.add("active");
+        setTimeout(() => bar.classList.remove("active"), 200);
+      }
+    });
+  }, 100);
+}
+
+function stopVisualizer() {
+  if (visualizerInterval) {
+    clearInterval(visualizerInterval);
+    visualizerInterval = null;
+  }
+}
+
+function resetVisualizer() {
+  const bars = document.querySelectorAll(".visualizer-bars .bar");
+  bars.forEach(bar => {
+    bar.style.height = "10px";
+    bar.classList.remove("active");
+  });
+}
+
+function generateNewQuizItemWithoutAutoPlay() {
+  const difficulty = (document.getElementById("quizDifficulty") || {}).value || "letter";
+  if (difficulty === "letter") {
+    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    const ch = letters[Math.floor(Math.random() * letters.length)];
+    quizTargetText = ch;
+    quizTargetMorse = morseCode[ch];
+  } else if (difficulty === "word") {
+    const words = [
+      "MORSE",
+      "CODE",
+      "HELLO",
+      "WORLD",
+      "TEST",
+      "RADIO",
+      "SIGNAL",
+      "LEARN",
+      "QUIZ",
+      "WARRIORZ"
+    ];
+    const w = words[Math.floor(Math.random() * words.length)];
+    quizTargetText = w;
+    quizTargetMorse = textToMorse(w);
+  } else {
+    const sentences = [
+      "HELLO WORLD",
+      "MORSE CODE QUIZ",
+      "I LOVE RADIO",
+      "LEARN MORSE FAST"
+    ];
+    const s = sentences[Math.floor(Math.random() * sentences.length)];
+    quizTargetText = s;
+    quizTargetMorse = textToMorse(s);
+  }
+
+  const resultDiv = document.getElementById("quizResult");
+  const input = document.getElementById("quizAnswer");
+  if (resultDiv) resultDiv.textContent = "";
+  if (input) {
+    smoothClearInput(input);
+  }
+  
+  // Reset progress and visualizer
+  resetProgress();
+  resetVisualizer();
+}
+
+function scrollToAnswerSection() {
+  // Removed auto-scrolling functionality
+  // Users can scroll manually if needed
+}
+
+function resetQuizGame() {
+  // Reset all game variables
+  quizRounds = 0;
+  quizCorrect = 0;
+  quizStreak = 0;
+  
+  // Update display
+  const scoreEl = document.getElementById("quizScore");
+  const roundEl = document.getElementById("quizRound");
+  const streakEl = document.getElementById("quizStreak");
+  const resultDiv = document.getElementById("quizResult");
+  const input = document.getElementById("quizAnswer");
+  
+  if (scoreEl) scoreEl.textContent = "0%";
+  if (roundEl) roundEl.textContent = "0";
+  if (streakEl) streakEl.textContent = "0";
+  if (resultDiv) resultDiv.textContent = "";
+  if (input) {
+    smoothClearInput(input);
+  }
+  
+  // Stop any current playback and audio context
+  stopQuizPlayback();
+  if (audioContext) {
+    audioContext.close();
+    audioContext = null;
+    initializeAudio();
+  }
+  
+  // Generate new item without auto-play
+  generateNewQuizItemWithoutAutoPlay();
 }
 
 // Resume audio context on user interaction (required by browsers)
