@@ -30,20 +30,76 @@ First off, thank you for considering contributing to Morse Warriorz! 🎉
    ```bash
    git clone https://github.com/kayspace/morse-warriorz.git
    ```
-3. **Create a branch** for your changes:
+3. **Check the issue**
+   - Look at GitHub Issues and decide what you want to work on
+   - Link your branch to the relevant issue if applicable
+
+4. **Create a new branch for every change**
    ```bash
-   git checkout -b feature/your-feature-name
+   git checkout master
+   git pull origin master
+   git checkout -b feature/short-description
    ```
-4. **Make your changes** and test them thoroughly
-5. **Commit** with clear messages:
+
+   **Examples:**
+   - `feature/dark-mode-toggle`
+   - `fix/typo-navbar`
+   - `bug/logic`
+   - `update/documentation`
+   - `issue-3-add-new-feature`
+   
+   > Even small fixes should get their own branch — keeps the repo clean and PRs focused.
+
+5. **Make changes locally**
+   - Edit code, styles, etc.
+   - Test thoroughly to make sure nothing else breaks
+
+6. **Commit your changes**
    ```bash
-   git commit -m "Add feature: brief description"
+   git add .
+   git commit -m "Fix: short-description (#1)"
    ```
-6. **Push** to your fork:
+   
+   - Use clear, concise commit messages
+   - Link to issue if relevant: `(#issue_number)`
+
+7. **Push branch to GitHub**
    ```bash
-   git push origin feature/your-feature-name
+   git push origin feature/short-description
    ```
-7. **Open a Pull Request** on GitHub
+
+8. **Open a Pull Request**
+   - Go to GitHub → your repo → Compare & pull request
+   - Fill in:
+     - **Title:** short, descriptive
+     - **Description:** what changed, why, how tested
+     - **Link issue:** `Fixes #<issue_number>`
+
+9. **Review & merge**
+   - Will review the code or have someone else reviewed
+   - GitHub automatically closes linked issues if `Fixes #<issue_number>` is used
+
+10. **Delete branch after merge**
+    
+    **Locally:**
+    ```bash
+    git checkout master
+    git branch -d feature/short-description
+    ```
+    
+    **Remotely:**
+    ```bash
+    git push origin --delete feature/short-description
+    ```
+
+11. **Update master before next change**
+    ```bash
+    git checkout master
+    git pull origin master
+    ```
+    
+    > Always start new changes from latest master.
+
 
 #### Code Style Guidelines
 - Use consistent indentation (2 or 4 spaces)
