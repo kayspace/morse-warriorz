@@ -24,6 +24,7 @@ This website helps you learn morse code through multiple interactive tools:
 - **Practice Quiz** - Interactive exercises to test your knowledge
 - **Reference Chart** - Complete alphabet and numbers with clickable audio
 - **Smooth Navigation** - Sticky navbar with smooth scrolling between sections
+- **Dark/Light theme** - you can use with dark mode
 
 ## 🛠️ Tech Stack
 
