@@ -522,3 +522,11 @@ document.addEventListener(
   },
   { once: true }
 );
+
+// Change theme
+const theme_button = document.querySelector(".change-theme");
+const body = document.querySelector("body");
+
+theme_button.addEventListener("click", () => {
+  body.classList.toggle("dark-theme");
+});
