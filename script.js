@@ -1,3 +1,32 @@
+// Theme toggle logic
+function setTheme(dark) {
+  const body = document.body;
+  const icon = document.getElementById('themeIcon');
+  if (dark) {
+    body.classList.add('dark-mode');
+    icon.textContent = '☀️';
+    localStorage.setItem('theme', 'dark');
+  } else {
+    body.classList.remove('dark-mode');
+    icon.textContent = '🌙';
+    localStorage.setItem('theme', 'light');
+  }
+}
+
+function toggleTheme() {
+  const isDark = document.body.classList.contains('dark-mode');
+  setTheme(!isDark);
+}
+
+function initThemeToggle() {
+  const btn = document.getElementById('themeToggle');
+  if (!btn) return;
+  btn.addEventListener('click', toggleTheme);
+  // Load preference
+  const saved = localStorage.getItem('theme');
+  if (saved === 'dark') setTheme(true);
+  else setTheme(false);
+}
 // Morse Code Dictionary
 const morseCode = {
   A: ".-",
@@ -88,6 +117,7 @@ let totalQuestions = 0;
 const currentSection = "converter";
 
 document.addEventListener("DOMContentLoaded", () => {
+  initThemeToggle();
   showLoadingAnimation();
 });
 
