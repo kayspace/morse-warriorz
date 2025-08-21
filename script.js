@@ -37,6 +37,23 @@ const morseCode = {
   8: "---..",
   9: "----.",
   " ": "/",
+  "&": ".-...",
+  "'": ".----.",
+  "@": ".--.-.",
+  ")": "-.--.-",
+  "(": "-.--.",
+  ":": "---...",
+  ",": "--..--",
+  "=": "-...-",
+  "!": "-.-.--",
+  ".": ".-.-.-",
+  "-": "-....-",
+  "×": "-..-",
+  "%": "----- -..-.",
+  "+": ".-.-.",
+  '"': ".-..-.",
+  "?": "..--..",
+  "/": "-..-.",
 };
 
 // Reverse morse code dictionary for decoding
@@ -344,7 +361,7 @@ function playTone(frequency, startTime, duration) {
 }
 
 function generateNewQuestion() {
-  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789&'@)(:,.=!×%+\"?/";
   const randomLetter = letters[Math.floor(Math.random() * letters.length)];
 
   currentAnswer = randomLetter;
@@ -437,7 +454,7 @@ function resetGame() {
 
 function generateMorseReference() {
   const morseGrid = document.getElementById("morseGrid");
-  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789&'@)(:,.=!×%+\"?/";
 
   for (const letter of letters) {
     const morseItem = document.createElement("div");
