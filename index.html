@@ -57,6 +57,7 @@
             <a href="#converter" class="nav-link">CONVERTER</a>
             <a href="#cheatsheet" class="nav-link">CHEATSHEET</a>
             <a href="#practice" class="nav-link">PRACTICE</a>
+            <a href="#sound-quiz" class="nav-link">SOUND QUIZ</a>
             <a href="#reference" class="nav-link">REFERENCE</a>
 
             <button class="change-theme">
@@ -119,9 +120,10 @@
         <!-- Practice Section -->
         <section id="practice" class="section">
             <div class="section-header">
-                <h2 class="section-title">Practice</h2>
+                <h2 class="section-title">Practice <span style="font-size: 15px;">(single letter/no/symbol for now)</span></h2>
                 <div class="section-number">04</div>
             </div>
+            
             <div class="practice-container">
                 <div class="practice-question-area">
                     <div id="practiceQuestion" class="practice-morse">.-</div>
@@ -133,9 +135,101 @@
                 </div>
                 <div id="practiceResult" class="practice-result"></div>
                 <div class="practice-score">
-                    <span>Score: <span id="score">0</span>/10</span>
+                    <span class="practice-score-title">SCORE: <span id="score">0</span>/10</span>
                     <button id="soundToggleBtn" class="btn-secondary"> Sound: ON</button>
                     <button id="newQuestionBtn" class="btn-primary">NEXT</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sound Quiz Section -->
+        <section id="sound-quiz" class="section">
+            <div class="section-header">
+                <h2 class="section-title">Sound Quiz</h2>
+                <div class="section-number">05</div>
+            </div>
+            <div class="quiz-container">
+                <!-- Settings Panel -->
+                <div class="player-settings">
+                    <div class="setting-group">
+                        <label for="quizDifficulty">Difficulty</label>
+                        <select id="quizDifficulty">
+                            <option value="letter" selected>Single letters/No/Symbols</option>
+                            <option value="word">Words</option>
+                            <option value="sentence">Sentences</option>
+                        </select>
+                    </div>
+                    <div class="setting-group">
+                        <label for="quizSpeed">Speed</label>
+                        <div class="speed-control">
+                            <input type="range" id="quizSpeed" min="0.5" max="3" step="0.1" value="1">
+                            <span id="quizSpeedValue">1.0x</span>
+                        </div>
+                    </div>
+                    <div class="setting-group">
+                        <label for="quizVolume">Volume</label>
+                        <div class="volume-control">
+                            <input type="range" id="quizVolume" min="0" max="100" value="80">
+                            <span id="quizVolumeValue">80%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Player Controls -->
+                <div class="player-controls">
+                    <div class="player-main-controls">
+                        <button id="quizPlayBtn" class="player-btn" title="Play">
+                            <i class="fa-solid fa-play"></i>
+                        </button>
+                        <div class="mini-visualizer">
+                            <div class="visualizer-bars">
+                                <div class="bar"></div>
+                                <div class="bar"></div>
+                                <div class="bar"></div>
+                                <div class="bar"></div>
+                                <div class="bar"></div>
+                                <div class="bar"></div>
+                            </div>
+                        </div>
+                        <button id="quizNextBtn" class="player-btn" title="Next Item">
+                            <i class="fa-solid fa-forward"></i>
+                        </button>
+                    </div>
+                </div>
+
+                
+
+                <!-- Answer Section -->
+                <div class="answer-section">
+                    <div class="answer-input-group">
+                        <input type="text" id="quizAnswer" placeholder="Decode the morse sound...">
+                        <button id="quizCheckBtn" class="check-btn" title="Check Answer">
+                            <i class="fa-solid fa-check"></i>
+                        </button>
+                    </div>
+                    <div id="quizResult" class="result-display"></div>
+                </div>
+
+                <!-- Stats -->
+                <div class="player-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Accuracy</span>
+                        <span class="stat-value" id="quizScore">0%</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Round</span>
+                        <span class="stat-value" id="quizRound">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Streak</span>
+                        <span class="stat-value" id="quizStreak">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <button id="quizResetBtn" class="reset-btn" title="Reset Game">
+                            <i class="fa-solid fa-arrow-rotate-left"></i>
+                            <span>Reset</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </section>
@@ -144,7 +238,7 @@
         <section id="reference" class="section">
             <div class="section-header">
                 <h2 class="section-title">Reference</h2>
-                <div class="section-number">05</div>
+                <div class="section-number">06</div>
             </div>
             <div class="morse-reference-grid" id="morseGrid">
                 <!-- Populated by JavaScript -->

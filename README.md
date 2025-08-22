@@ -99,6 +99,9 @@ The app features smooth scrolling navigation between sections:
 ![Practice Quiz](assets/quiz-section.png)
 *Interactive quiz for testing knowledge*
 
+![Sound Quiz](assets/sound-quiz-section.png)
+*Interactive sound based decoding quiz for testing knowledge*
+
 ![Reference](assets/reference-section.png)
 *Aplhabets and Numbers Reference*
 
