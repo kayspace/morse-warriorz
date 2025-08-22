@@ -120,9 +120,10 @@
         <!-- Practice Section -->
         <section id="practice" class="section">
             <div class="section-header">
-                <h2 class="section-title">Practice</h2>
+                <h2 class="section-title">Practice <span style="font-size: 15px;">(single letter/no/symbol for now)</span></h2>
                 <div class="section-number">04</div>
             </div>
+            
             <div class="practice-container">
                 <div class="practice-question-area">
                     <div id="practiceQuestion" class="practice-morse">.-</div>
@@ -134,7 +135,7 @@
                 </div>
                 <div id="practiceResult" class="practice-result"></div>
                 <div class="practice-score">
-                    <span>Score: <span id="score">0</span>/10</span>
+                    <span class="practice-score-title">SCORE: <span id="score">0</span>/10</span>
                     <button id="soundToggleBtn" class="btn-secondary"> Sound: ON</button>
                     <button id="newQuestionBtn" class="btn-primary">NEXT</button>
                 </div>
@@ -153,7 +154,7 @@
                     <div class="setting-group">
                         <label for="quizDifficulty">Difficulty</label>
                         <select id="quizDifficulty">
-                            <option value="letter" selected>Single letters</option>
+                            <option value="letter" selected>Single letters/No/Symbols</option>
                             <option value="word">Words</option>
                             <option value="sentence">Sentences</option>
                         </select>
@@ -161,7 +162,7 @@
                     <div class="setting-group">
                         <label for="quizSpeed">Speed</label>
                         <div class="speed-control">
-                            <input type="range" id="quizSpeed" min="0.5" max="2" step="0.1" value="1">
+                            <input type="range" id="quizSpeed" min="0.5" max="3" step="0.1" value="1">
                             <span id="quizSpeedValue">1.0x</span>
                         </div>
                     </div>
@@ -201,7 +202,7 @@
                 <!-- Answer Section -->
                 <div class="answer-section">
                     <div class="answer-input-group">
-                        <input type="text" id="quizAnswer" placeholder="Type what you heard...">
+                        <input type="text" id="quizAnswer" placeholder="Decode the morse sound...">
                         <button id="quizCheckBtn" class="check-btn" title="Check Answer">
                             <i class="fa-solid fa-check"></i>
                         </button>

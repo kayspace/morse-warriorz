@@ -511,7 +511,7 @@ function checkAnswer() {
       setTimeout(() => playTone(1000, audioContext.currentTime, 0.2), 200);
     }
   } else {
-    resultDiv.textContent = `Incorrect. The answer was "${currentAnswer}"`;
+    resultDiv.textContent = `Incorrect. The answer was ${currentAnswer}`;
     resultDiv.className = "practice-result incorrect";
 
     // Play error sound
@@ -620,7 +620,10 @@ function initializeSoundQuiz() {
   setQuizStatusText("Ready");
 }
 
-function smoothClearInput(inputEl, placeholderText = "Type what you heard...") {
+function smoothClearInput(
+  inputEl,
+  placeholderText = "Decode the morse sound..."
+) {
   try {
     inputEl.classList.add("clearing");
     setTimeout(() => {
@@ -890,7 +893,7 @@ function resetVisualizer() {
 function generateNewQuizItemWithoutAutoPlay() {
   const difficulty = (document.getElementById("quizDifficulty") || {}).value || "letter";
   if (difficulty === "letter") {
-    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789&'@)(:,.=!×%+\"?/";
     const ch = letters[Math.floor(Math.random() * letters.length)];
     quizTargetText = ch;
     quizTargetMorse = morseCode[ch];

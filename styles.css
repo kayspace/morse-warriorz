@@ -389,7 +389,7 @@ body {
   text-align: center;
   font-size: 32px;
   font-weight: 300;
-  border: 1px solid var(--color-8);
+  border: 1px solid var(--color-9);
   background: var(--color-6);
   text-transform: uppercase;
   color: var(--color-2);
@@ -433,17 +433,14 @@ body {
   align-items: center;
   padding-top: 40px;
   border-top: 1px solid var(--color-8);
+  font-family: "JetBrains Mono", monospace;
 }
 
 /* Sound Quiz - Music Player Style */
 .quiz-container {
   max-width: 900px;
   margin: 0 auto;
-  background: var(--color-6);
-  border: 1px solid var(--color-8);
-  border-radius: 12px;
   padding: 40px;
-  box-shadow: 0 4px 20px var(--alpha-color-2);
 }
 
 /* Player Controls */
@@ -487,11 +484,9 @@ body {
 }
 
 .reset-btn {
-  background: var(--color-4);
-  border: 2px solid var(--color-4);
+  background: var(--color-2);
   color: var(--color-6);
-  padding: 8px 16px;
-  border-radius: 6px;
+  padding: 12px 30px;
   font-size: 12px;
   font-weight: 500;
   cursor: pointer;
@@ -501,6 +496,7 @@ body {
   gap: 6px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  border: none;
 }
 
 .reset-btn:hover {
@@ -522,8 +518,6 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 30px;
   margin-bottom: 40px;
-  padding: 30px;
-  background: var(--color-7);
   border-radius: 8px;
 }
 
@@ -544,11 +538,10 @@ body {
 .setting-group select {
   padding: 12px;
   background: var(--color-6);
-  border: 1px solid var(--color-8);
+  border: 1px solid var(--color-9);
   color: var(--color-2);
   font-family: "Inter", sans-serif;
   font-size: 14px;
-  border-radius: 4px;
 }
 
 .speed-control,
@@ -633,11 +626,10 @@ body {
 .answer-input-group input {
   flex: 1;
   padding: 16px 20px;
-  border: 2px solid var(--color-8);
+  border: 1px solid var(--color-9);
   background: var(--color-6);
   color: var(--color-2);
   font-size: 16px;
-  border-radius: 8px;
   transition: border-color 0.3s ease;
 }
 
@@ -665,6 +657,33 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
+}
+
+@media (max-width: 400px) {
+  .check-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+
+  .answer-input-group input {
+    font-size: 14px;
+    padding: 10px 14px;
+  }
+}
+
+@media (max-width: 320px) {
+  .check-btn {
+    width: 35px;
+    height: 35px;
+    font-size: 14px;
+  }
+
+  .answer-input-group input {
+    font-size: 13px;
+    padding: 8px 12px;
+  }
 }
 
 .check-btn:hover {
@@ -678,7 +697,6 @@ body {
   font-weight: 500;
   min-height: 30px;
   padding: 15px;
-  border-radius: 8px;
   transition: all 0.3s ease;
 }
 
@@ -714,6 +732,10 @@ body {
 
 .stat-item {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .stat-label {
