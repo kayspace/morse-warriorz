@@ -1,23 +1,23 @@
 # Contributing to Morse Warriorz
 
-First off, thank you for considering contributing to Morse Warriorz! 🎉
+First off, thank you for considering contributing to Morse Warriorz! 
 
 ## Ways to Contribute
 
-### 🐛 Reporting Bugs
+### Reporting Bugs
 - Use the GitHub Issues tab
 - Check if the bug has already been reported
 - Include detailed steps to reproduce
 - Add screenshots if helpful
 - Mention your browser/device info
 
-### 💡 Suggesting Features
+### Suggesting Features
 - Open a GitHub Issue with the "enhancement" label
 - Describe the feature clearly
 - Explain why it would be useful
 - Consider how it fits with the project's goals
 
-### 🔧 Code Contributions
+### Code Contributions
 
 #### Before You Start
 1. Check existing issues to see if someone's already working on it
@@ -46,7 +46,8 @@ First off, thank you for considering contributing to Morse Warriorz! 🎉
    - `fix/typo-navbar`
    - `bug/logic`
    - `update/documentation`
-   - `issue-3-add-new-feature`
+   - `refactor/code-logic`
+   - `experiment/description`
    
    > Even small fixes should get their own branch — keeps the repo clean and PRs focused.
 
@@ -114,7 +115,7 @@ First off, thank you for considering contributing to Morse Warriorz! 🎉
 - Verify audio works correctly
 - Make sure all existing functionality still works
 
-### 📝 Documentation
+### Documentation
 - Improve README or other docs
 - Add code comments
 - Create tutorials or guides
@@ -179,4 +180,4 @@ Don't hesitate to ask! Open an issue with the "question" label, and we'll help y
 
 ---
 
-Thank you for contributing to Morse Warriorz! 🚀
+Thank you for contributing to Morse Warriorz! 

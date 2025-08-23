@@ -1,13 +1,13 @@
-# 🎯 Morse Warriorz
+# Morse Warriorz
 
 A minimalist morse code learning platform with interactive converters, memorable phrases, and practice exercises.
 
-## 💡 Why This Exists
+## Why This Exists
 
 - This project was born from a spontaneous moment of curiosity - one day I suddenly had the urge to learn Morse code just to pass time. Then i straight went to youtube to check about morse code and one of the video I watched, I used it as a refernce to create a section in the website. 
 - Instead of using existing tools, I decided to create my own website with an intuitive, fun, and easy-to-use interface. The goal was to build something I could always refer back to for anything Morse code related, while making the learning experience enjoyable and accessible.
 
-## 🚀 What It Does
+## What It Does
 
 This website helps you learn morse code through multiple interactive tools:
 - Convert text to morse code and vice versa
@@ -16,23 +16,24 @@ This website helps you learn morse code through multiple interactive tools:
 - Practice with letter/number quizzes
 - Reference complete morse code alphabet with audio
 
-## ✨ Features
+## Features
 
 - **Text ↔ Morse Converter** - Real-time conversion between text and morse code
 - **Audio Playback** - Hear morse code with Web Audio API generated sounds
 - **Memory Cheatsheet** - Memorable phrases for each letter (lowercase = dot, UPPERCASE = dash)
 - **Practice Quiz** - Interactive exercises to test your knowledge
+- **Sound Quiz** - Sound based decoding quiz for testing knowledge
 - **Reference Chart** - Complete alphabet and numbers with clickable audio
 - **Smooth Navigation** - Sticky navbar with smooth scrolling between sections
 - **Dark/Light theme** - you can use with dark mode
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Frontend**: HTML5, CSS3, JavaScript
 - **Audio**: Web Audio API for Morse code sounds
 - **Styling**: Modern CSS with responsive design
 
-## 📦 Installation & Setup
+## Installation & Setup
 
 ### Quick Start
 1. Clone the repository:
@@ -70,7 +71,7 @@ npx http-server
 # Then visit http://localhost:8000
 ```
 
-## 🚀 How to Use
+## How to Use
 
 1. **Converter**: Type text to see morse code, or input morse code to see text
 2. **Audio**: Click play buttons to hear morse code sounds
@@ -78,7 +79,7 @@ npx http-server
 4. **Quiz**: Practice identifying letters and numbers
 5. **Reference**: Click any morse code in the chart to hear it aloud
 
-## 🎯 Navigation
+## Navigation
 
 The app features smooth scrolling navigation between sections:
 - **Home**: Welcome and introduction
@@ -87,7 +88,7 @@ The app features smooth scrolling navigation between sections:
 - **Quiz**: Practice exercises
 - **Reference**: Complete morse code chart
 
-## 📸 Application Interface Screenshots
+## Application Interface Screenshots
 
 <!-- Add screenshots here - see instructions below -->
 ![Main Interface](assets/main-interface.png)
@@ -105,7 +106,7 @@ The app features smooth scrolling navigation between sections:
 ![Reference](assets/reference-section.png)
 *Aplhabets and Numbers Reference*
 
-## 🤝 Contributing
+## Contributing
 
 We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for detailed information on how to get started.
 
@@ -116,7 +117,7 @@ Quick ideas for contributions:
 - Better mobile responsiveness
 - Dark/light theme toggle
 
-## 🐛 Bug Reports
+## Bug Reports
 
 Found a bug? Please create an issue with:
 - Clear description of the problem
@@ -125,25 +126,25 @@ Found a bug? Please create an issue with:
 - Browser/device information
 - Screenshots (if applicable)
 
-## 📚 Learn More About Morse Code
+## Learn More About Morse Code
 
 - [International Morse Code](https://en.wikipedia.org/wiki/Morse_code)
 - [Morse Code Learning Resources](https://morsecode.world/international/morse2.html)
 - [Amateur Radio Morse Code](https://www.arrl.org/learning-morse-code)
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 👨‍💻 Author
+## Author
 
 **Kay Space** - [GitHub Profile](https://github.com/kayspace)
 
-## ⭐ Show Your Support
+## Show Your Support
 
 If you found this project helpful, please give it a star! It helps others discover the project.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - Thanks to all contributors who help improve this project
 - Inspired by the need to make Morse code learning fun and accessible
@@ -151,4 +152,4 @@ If you found this project helpful, please give it a star! It helps others discov
 
 ---
 
-**Happy Learning! 📻 ·-· ·-· ·-· ·-·**
+**Happy Learning!  ... -- .. .-.. .**
