@@ -147,6 +147,44 @@ function showLoadingAnimation() {
   }, 100);
 }
 
+// accordion functionality for cheatsheet and reference sections
+function initializeAccordions() {
+    // Cheatsheet section
+    const cheatsheetHeader = document.getElementById('cheatsheet-accordion');
+    const cheatsheetContent = document.getElementById('cheatsheet-content');
+    const cheatsheetArrow = document.getElementById('cheatsheet-arrow');
+
+    cheatsheetHeader.addEventListener('click', function() {
+        if (cheatsheetContent.classList.contains('collapsed')) {
+            // Show content
+            cheatsheetContent.classList.remove('collapsed');
+            cheatsheetArrow.classList.remove('collapsed');
+        } else {
+            // Hide content
+            cheatsheetContent.classList.add('collapsed');
+            cheatsheetArrow.classList.add('collapsed');
+        }
+    });
+
+    // Reference section
+    const referenceHeader = document.getElementById('reference-accordion');
+    const referenceContent = document.getElementById('reference-content');
+    const referenceArrow = document.getElementById('reference-arrow');
+
+    referenceHeader.addEventListener('click', function() {
+        if (referenceContent.classList.contains('collapsed')) {
+            // Show content
+            referenceContent.classList.remove('collapsed');
+            referenceArrow.classList.remove('collapsed');
+
+        } else {
+            // Hide content
+            referenceContent.classList.add('collapsed');
+            referenceArrow.classList.add('collapsed');
+        }
+    });
+}
+
 function initializeApp() {
   initializeAudio();
   setupEventListeners();
@@ -155,6 +193,7 @@ function initializeApp() {
   generateNewQuestion();
   initializeSoundQuiz();
   setupScrollNavigation();
+  initializeAccordions();
 }
 
 function setupScrollNavigation() {

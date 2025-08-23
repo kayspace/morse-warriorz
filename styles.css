@@ -177,7 +177,7 @@ body {
 
 /* Sections */
 .section {
-  padding: 120px 0;
+  padding: 60px 0;
   border-bottom: 1px solid var(--color-8);
 }
 
@@ -354,6 +354,70 @@ body {
   color: var(--color-4);
   line-height: 1.6;
   font-style: italic;
+}
+
+/* Accordion functinality - Only for cheatsheet and reference sections */
+.cheatsheet-header,
+.reference-header {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 10px 20px;
+  margin: -10px -20px 40px -20px;
+  user-select: none;
+}
+
+.cheatsheet-header:hover,
+.reference-header:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.cheatsheet-header.collapsed,
+.reference-header.collapsed {
+  opacity: 0.7;
+  margin-bottom: 0;
+}
+
+.accordion-arrow {
+  margin-left: 20px;
+  transition: transform 0.3s ease;
+  color: var(--color-4);
+  font-size: 1.2rem;
+}
+
+.accordion-arrow.collapsed {
+  transform: rotate(-180deg);
+}
+
+/* Accordion Content */
+.accordion-content {
+  transition: all 0.4s ease;
+  overflow: hidden;
+  max-height: none;
+}
+
+.accordion-content.collapsed {
+  max-height: 0;
+  opacity: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.accordion-content .section-description {
+  color: var(--color-4);
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.accordion-content .cheatsheet-grid,
+.accordion-content .morse-reference-grid {
+  transition: opacity 0.3s ease 0.1s;
+}
+
+.accordion-content.collapsed .cheatsheet-grid,
+.accordion-content.collapsed .morse-reference-grid {
+  transition: none;
 }
 
 /* Practice Section */
@@ -835,11 +899,11 @@ body {
   }
 
   .section {
-    padding: 80px 0;
+    padding: 40px 0;
   }
 
   .section-header {
-    flex-direction: column;
+    /* flex-direction: column; */
     gap: 20px;
     margin-bottom: 60px;
   }
