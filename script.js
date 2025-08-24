@@ -125,25 +125,24 @@ function showLoadingAnimation() {
   const loadingCounter = document.getElementById("loadingCounter");
   const mainContent = document.getElementById("mainContent");
 
-  // Ensure page starts at top
   window.scrollTo(0, 0);
+
+  initializeApp();
 
   let counter = 0;
   const interval = setInterval(() => {
     counter += Math.floor(Math.random() * 15) + 5;
+    loadingCounter.textContent = Math.min(counter, 100);
     if (counter >= 100) {
-      counter = 100;
       clearInterval(interval);
 
       setTimeout(() => {
         loadingScreen.classList.add("hidden");
         mainContent.classList.add("visible");
-        initializeApp();
-        // Ensure focus is at top after initialization
         window.scrollTo(0, 0);
-      }, 500);
+      }, 300);
     }
-    loadingCounter.textContent = counter;
+
   }, 100);
 }
 

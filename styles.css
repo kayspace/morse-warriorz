@@ -82,6 +82,7 @@ body {
 
 .loading-content {
   text-align: center;
+  text-transform: uppercase;
 }
 
 .loading-text {
