@@ -41,7 +41,7 @@ First off, thank you for considering contributing to Morse Warriorz!
    git checkout -b feature/short-description
    ```
 
-   **Examples:**
+   **Examples for branch names:**
    - `feature/dark-mode-toggle`
    - `fix/typo-navbar`
    - `bug/logic`
@@ -58,11 +58,18 @@ First off, thank you for considering contributing to Morse Warriorz!
 6. **Commit your changes**
    ```bash
    git add .
-   git commit -m "Fix: short-description (#1)"
+   git commit -m "fix: short-description (#1)"
    ```
    
    - Use clear, concise commit messages
-   - Link to issue if relevant: `(#issue_number)`
+   > Link to issue if relevant or if you are working on an issue: `(#issue_number)`
+
+   **Examples for commit messages:**
+   - `feat: short-description (issue_number)`
+   - `fix: short-description (issue_number) `
+   - `bug: short-description (issue_number)`
+   - `update: short-description (issue_number)`
+   - `refactor: short-description (issue_number)`
 
 7. **Push branch to GitHub**
    ```bash
