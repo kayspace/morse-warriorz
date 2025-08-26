@@ -147,7 +147,14 @@ body {
   color: var(--color-2);
 }
 
-.nav-link::after {
+.nav-link.active {
+  color: var(--color-2);
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+/* .nav-link::after,
+.nav-link.active::after {
   content: "";
   position: absolute;
   bottom: -5px;
@@ -160,7 +167,7 @@ body {
 
 .nav-link:hover::after {
   width: 100%;
-}
+} */
 
 /* theme icon */
 
@@ -170,6 +177,7 @@ body {
   font-size: 21px;
   color: var(--color-4);
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .change-theme:hover {
