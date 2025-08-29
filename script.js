@@ -148,40 +148,40 @@ function showLoadingAnimation() {
 
 // accordion functionality for cheatsheet and reference sections
 function initializeAccordions() {
-    // Cheatsheet section
-    const cheatsheetHeader = document.getElementById('cheatsheet-accordion');
-    const cheatsheetContent = document.getElementById('cheatsheet-content');
-    const cheatsheetArrow = document.getElementById('cheatsheet-arrow');
+  // Cheatsheet section
+  const cheatsheetHeader = document.getElementById('cheatsheet-accordion');
+  const cheatsheetContent = document.getElementById('cheatsheet-content');
+  const cheatsheetArrow = document.getElementById('cheatsheet-arrow');
 
-    cheatsheetHeader.addEventListener('click', function() {
-        if (cheatsheetContent.classList.contains('collapsed')) {
-            // Show content
-            cheatsheetContent.classList.remove('collapsed');
-            cheatsheetArrow.classList.remove('collapsed');
-        } else {
-            // Hide content
-            cheatsheetContent.classList.add('collapsed');
-            cheatsheetArrow.classList.add('collapsed');
-        }
-    });
+  cheatsheetHeader.addEventListener('click', function () {
+    if (cheatsheetContent.classList.contains('collapsed')) {
+      // Show content
+      cheatsheetContent.classList.remove('collapsed');
+      cheatsheetArrow.classList.remove('collapsed');
+    } else {
+      // Hide content
+      cheatsheetContent.classList.add('collapsed');
+      cheatsheetArrow.classList.add('collapsed');
+    }
+  });
 
-    // Reference section
-    const referenceHeader = document.getElementById('reference-accordion');
-    const referenceContent = document.getElementById('reference-content');
-    const referenceArrow = document.getElementById('reference-arrow');
+  // Reference section
+  const referenceHeader = document.getElementById('reference-accordion');
+  const referenceContent = document.getElementById('reference-content');
+  const referenceArrow = document.getElementById('reference-arrow');
 
-    referenceHeader.addEventListener('click', function() {
-        if (referenceContent.classList.contains('collapsed')) {
-            // Show content
-            referenceContent.classList.remove('collapsed');
-            referenceArrow.classList.remove('collapsed');
+  referenceHeader.addEventListener('click', function () {
+    if (referenceContent.classList.contains('collapsed')) {
+      // Show content
+      referenceContent.classList.remove('collapsed');
+      referenceArrow.classList.remove('collapsed');
 
-        } else {
-            // Hide content
-            referenceContent.classList.add('collapsed');
-            referenceArrow.classList.add('collapsed');
-        }
-    });
+    } else {
+      // Hide content
+      referenceContent.classList.add('collapsed');
+      referenceArrow.classList.add('collapsed');
+    }
+  });
 }
 
 function initializeApp() {
@@ -340,7 +340,7 @@ function setupEventListeners() {
     quizVolume.addEventListener("input", () => {
       currentVolume = Number(quizVolume.value) / 100;
       quizVolumeValue.textContent = `${quizVolume.value}%`;
-      
+
       // Update volume for currently playing audio
       if (isPlaying && audioContext) {
         // The volume will be applied to new tones being created
@@ -362,10 +362,11 @@ function convertToMorse() {
   const text = document.getElementById("textInput").value.toUpperCase();
   const morseOutput = document.getElementById("morseOutput");
   const playBtn = document.getElementById("playBtn");
-
+  const copyBtn = document.getElementById("copyBtn");
   if (!text.trim()) {
     morseOutput.textContent = "";
     playBtn.disabled = true;
+    copyBtn.disabled = true;
     return;
   }
 
@@ -382,6 +383,19 @@ function convertToMorse() {
 
   morseOutput.textContent = morse.trim();
   playBtn.disabled = false;
+  copyBtn.disabled = false;
+}
+
+
+copyBtn.addEventListener("click", copyMorse);
+function copyMorse() {
+  const text = morseOutput.textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    copyBtn.textContent = "COPIED!";
+    setTimeout(() => {
+      copyBtn.textContent = "COPY";
+    }, 2000)
+  })
 }
 
 function decodeFromMorse() {
@@ -686,7 +700,7 @@ function getQuizSpeedMultiplier() {
 function generateNewQuizItem() {
   // Stop current playback first
   stopQuizPlayback();
-  
+
   const difficulty = (document.getElementById("quizDifficulty") || {}).value || "letter";
   if (difficulty === "letter") {
     const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -727,11 +741,11 @@ function generateNewQuizItem() {
   if (input) {
     smoothClearInput(input);
   }
-  
+
   // Reset progress and visualizer
   resetProgress();
   resetVisualizer();
-  
+
   // Auto-play the new item
   setTimeout(() => {
     if (quizTargetMorse) {
@@ -865,7 +879,7 @@ function stopQuizPlayback() {
   setQuizPlayingState(false);
   stopProgressTracking();
   stopVisualizer();
-  
+
   // Stop all audio by closing and reinitializing audio context
   if (audioContext) {
     audioContext.close();
@@ -879,7 +893,7 @@ function stopQuizPlayback() {
 function setQuizPlayingState(playing) {
   const playBtn = document.getElementById("quizPlayBtn");
   if (!playBtn) return;
-  
+
   if (playing) {
     playBtn.innerHTML = '<i class="fa-solid fa-stop"></i>';
     playBtn.title = "Stop";
@@ -899,12 +913,12 @@ function resetProgress() { /* progress removed */ }
 
 function startVisualizer() {
   const bars = document.querySelectorAll(".visualizer-bars .bar");
-  
+
   visualizerInterval = setInterval(() => {
     bars.forEach((bar, index) => {
       const height = Math.random() * 30 + 10;
       bar.style.height = `${height}px`;
-      
+
       if (Math.random() > 0.7) {
         bar.classList.add("active");
         setTimeout(() => bar.classList.remove("active"), 200);
@@ -969,7 +983,7 @@ function generateNewQuizItemWithoutAutoPlay() {
   if (input) {
     smoothClearInput(input);
   }
-  
+
   // Reset progress and visualizer
   resetProgress();
   resetVisualizer();
@@ -985,14 +999,14 @@ function resetQuizGame() {
   quizRounds = 0;
   quizCorrect = 0;
   quizStreak = 0;
-  
+
   // Update display
   const scoreEl = document.getElementById("quizScore");
   const roundEl = document.getElementById("quizRound");
   const streakEl = document.getElementById("quizStreak");
   const resultDiv = document.getElementById("quizResult");
   const input = document.getElementById("quizAnswer");
-  
+
   if (scoreEl) scoreEl.textContent = "0%";
   if (roundEl) roundEl.textContent = "0";
   if (streakEl) streakEl.textContent = "0";
@@ -1000,7 +1014,7 @@ function resetQuizGame() {
   if (input) {
     smoothClearInput(input);
   }
-  
+
   // Stop any current playback and audio context
   stopQuizPlayback();
   if (audioContext) {
@@ -1008,7 +1022,7 @@ function resetQuizGame() {
     audioContext = null;
     initializeAudio();
   }
-  
+
   // Generate new item without auto-play
   generateNewQuizItemWithoutAutoPlay();
 }
