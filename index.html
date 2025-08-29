@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Morse Warriorz</title>
-    
-    <meta name="description" content="Morse Warriorz Website - A minimalist morse code learning platform with interactive converters, memorable phrases, and practice exercises.">
+
+    <meta name="description"
+        content="Morse Warriorz Website - A minimalist morse code learning platform with interactive converters, memorable phrases, and practice exercises.">
     <meta name="title" content="Morse Warriorz - Learn Morse Code Online | Interactive Converter & Practice">
-    <meta name="keywords" content="morse, morse code, morse code converter, learn morse code, morse code practice, morse code translator, morse code quiz, morse code training, morse code reference, dots and dashes">
+    <meta name="keywords"
+        content="morse, morse code, morse code converter, learn morse code, morse code practice, morse code translator, morse code quiz, morse code training, morse code reference, dots and dashes">
     <meta name="author" content="Morse Warriorz">
     <meta name="robots" content="index, follow">
     <meta name="language" content="English">
@@ -18,7 +21,8 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://morse-warriorz.vercel.app/">
     <meta property="og:title" content="Morse Warriorz - Learn Morse Code Online | Interactive Converter & Practice">
-    <meta property="og:description" content="Master morse code with our interactive learning platform. Features text-to-morse converter, practice exercises, memory guides, and sound quizzes.">
+    <meta property="og:description"
+        content="Master morse code with our interactive learning platform. Features text-to-morse converter, practice exercises, memory guides, and sound quizzes.">
     <meta property="og:image" content="https://morse-warriorz.vercel.app/assets/og-image.png">
     <meta property="og:site_name" content="Morse Warriorz">
 
@@ -70,10 +74,14 @@
     <link rel="icon" type="image/png" sizes="512x512" href="/assets/android-chrome-512x512.png">
 
     <!-- Google fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
 
     <!-- Font awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <link rel="stylesheet" href="styles.css">
 
@@ -81,15 +89,16 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-F23FKRN6JT"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+        function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
 
         gtag('config', 'G-F23FKRN6JT');
     </script>
 
 </head>
+
 <body>
-   
+
     <div class="loading-screen" id="loadingScreen">
         <div class="loading-content">
             <div class="loading-text">LOADING : Morse Warriorz</div>
@@ -131,11 +140,11 @@
                 <div class="output-area">
                     <div id="morseOutput" class="morse-display">
                     </div>
-                        <div class="button-row">
+                    <div class="button-row">
                         <button id="copyBtn" class="btn-primary" disabled>COPY</button>
                     </div>
                 </div>
-                
+
             </div>
         </section>
 
@@ -159,13 +168,15 @@
         <!-- Cheatsheet Section -->
         <section id="cheatsheet" class="section">
             <div class="section-header  cheatsheet-header" id="cheatsheet-accordion">
-                <h2 class="section-title">Memory Guide <i class="fa-solid fa-chevron-down accordion-arrow" id="cheatsheet-arrow"></i></h2>
+                <h2 class="section-title">Memory Guide <i class="fa-solid fa-chevron-down accordion-arrow"
+                        id="cheatsheet-arrow"></i></h2>
                 <div class="section-number">03</div>
             </div>
             <div id="cheatsheet-content" class="accordion-content">
                 <p class="section-description">
                     Memorable phrase nuances to learn morse code patterns. (lowercase = dot, CAPS = dash)<br>
-                    <a href="https://youtu.be/D8tPkb98Fkk?si=a8Dmf6OsBYNEMdrF" target="_blank" class="video-link">Original YouTube reference</a>
+                    <a href="https://youtu.be/D8tPkb98Fkk?si=a8Dmf6OsBYNEMdrF" target="_blank"
+                        class="video-link">Original YouTube reference</a>
                 </p>
                 <div class="cheatsheet-grid" id="cheatsheetGrid">
                     <!-- Populated by JavaScript -->
@@ -176,10 +187,11 @@
         <!-- Practice Section -->
         <section id="practice" class="section">
             <div class="section-header">
-                <h2 class="section-title">Practice <span style="font-size: 13px;">(single letter/no/symbol for now)</span></h2>
+                <h2 class="section-title">Practice <span style="font-size: 13px;">(single letter/no/symbol for
+                        now)</span></h2>
                 <div class="section-number">04</div>
             </div>
-            
+
             <div class="practice-container">
                 <div class="practice-question-area">
                     <div id="practiceQuestion" class="practice-morse">.-</div>
@@ -253,7 +265,7 @@
                     </div>
                 </div>
 
-                
+
 
                 <!-- Answer Section -->
                 <div class="answer-section">
@@ -293,7 +305,8 @@
         <!-- Reference Section -->
         <section id="reference" class="section">
             <div class="section-header reference-header" id="reference-accordion">
-                <h2 class="section-title">Reference  <i class="fa-solid fa-chevron-down accordion-arrow" id="reference-arrow"></i></h2>
+                <h2 class="section-title">Reference <i class="fa-solid fa-chevron-down accordion-arrow"
+                        id="reference-arrow"></i></h2>
                 <div class="section-number">06</div>
             </div>
             <div id="reference-content" class="accordion-content">
@@ -313,4 +326,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>
