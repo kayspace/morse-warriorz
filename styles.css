@@ -255,7 +255,31 @@ body {
 .output-area {
   min-height: 120px;
   display: flex;
-  align-items: center;
+  align-items: stretch;
+  position: relative;
+}
+
+.copy-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 8px 16px;
+  background: var(--color-2);
+  color: var(--color-6);
+  border: none;
+  font-family: "Inter", sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.copy-btn:hover {
+  opacity: 1;
+  background: var(--color-3);
 }
 
 .morse-display,

@@ -275,6 +275,10 @@ function setupEventListeners() {
     .addEventListener("input", convertToMorse);
   document.getElementById("playBtn").addEventListener("click", playMorseSound);
 
+  document
+    .getElementById("copyBtn")
+    .addEventListener("click", copyMorseToClipboard);
+
   // Morse to Text converter
   document
     .getElementById("decodeBtn")
@@ -362,10 +366,12 @@ function convertToMorse() {
   const text = document.getElementById("textInput").value.toUpperCase();
   const morseOutput = document.getElementById("morseOutput");
   const playBtn = document.getElementById("playBtn");
+  const copyBtn = document.getElementById("copyBtn");
 
   if (!text.trim()) {
     morseOutput.textContent = "";
     playBtn.disabled = true;
+    copyBtn.style.display = "none";
     return;
   }
 
@@ -382,6 +388,23 @@ function convertToMorse() {
 
   morseOutput.textContent = morse.trim();
   playBtn.disabled = false;
+   copyBtn.style.display = "block";
+}
+
+async function copyMorseToClipboard() {
+  const morseOutput = document.getElementById("morseOutput");
+  const copyBtn = document.getElementById("copyBtn");
+  const copyText = copyBtn.querySelector(".copy-text");
+
+  if (!morseOutput.textContent) return;
+
+  await navigator.clipboard.writeText(morseOutput.textContent);
+  copyText.textContent = "COPIED!";
+
+  setTimeout(() => {
+    copyText.textContent = "COPY";
+    copyBtn.classList.remove("copied");
+  }, 2000);
 }
 
 function decodeFromMorse() {
