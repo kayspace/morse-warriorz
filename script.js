@@ -286,6 +286,18 @@ function setupEventListeners() {
   document
     .getElementById("morseInput")
     .addEventListener("input", decodeFromMorse);
+  document
+    .getElementById("clearTextBtn")
+    .addEventListener("click", () => {
+      document.getElementById("textInput").value = "";
+      convertToMorse();
+    });
+  document
+    .getElementById("clearMorseBtn")
+    .addEventListener("click", () => {
+      document.getElementById("morseInput").value = "";
+      decodeFromMorse();
+    });
 
   // Practice game
   document
