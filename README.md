@@ -110,13 +110,6 @@ The app features smooth scrolling navigation between sections:
 
 We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for detailed information on how to get started.
 
-Quick ideas for contributions:
-- Add more memorable phrases for better learning
-- Improve quiz functionality with scoring
-- Add speed/timing challenges
-- Better mobile responsiveness
-- Dark/light theme toggle
-
 ## Bug Reports
 
 Found a bug? Please create an issue with:
