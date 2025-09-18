@@ -126,6 +126,9 @@
                     <div class="button-row">
                         <button id="convertBtn" class="btn-primary">CONVERT</button>
                         <button id="playBtn" class="btn-secondary" disabled>PLAY</button>
+                        <button id="clearTextBtn" class="btn-secondary clear-btn" title="Clear Text">
+                            <i class="fas fa-trash"></i>
+                        </button>
                     </div>
                 </div>
                 <div class="output-area converter-output">
@@ -146,7 +149,12 @@
             <div class="converter-grid">
                 <div class="input-area">
                     <textarea id="morseInput" placeholder="... --- ..." rows="4"></textarea>
-                    <button id="decodeBtn" class="btn-primary">DECODE</button>
+                    <div class="button-row">
+                        <button id="decodeBtn" class="btn-primary">DECODE</button>
+                        <button id="clearMorseBtn" class="btn-secondary clear-btn" title="Clear Morse">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
                 </div>
                 <div class="output-area">
                     <div id="textOutput" class="text-display"></div>

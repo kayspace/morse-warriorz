@@ -347,6 +347,15 @@ body {
   cursor: not-allowed;
 }
 
+.clear-btn {
+  padding: 12px 15px;
+  min-width: 50px;
+}
+
+.clear-btn i {
+  font-size: 12px;
+}
+
 /* Cheatsheet Grid */
 .cheatsheet-grid {
   display: grid;
